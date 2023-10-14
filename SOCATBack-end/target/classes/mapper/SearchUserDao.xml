@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.somiao.miniprogram.dao.SearchUserDao">
+    <!-- 定义的resultMap，可以解决类的属性名和数据库列名不一致的问题-->
+    <resultMap id="BaseResultMap2" type="com.somiao.miniprogram.entity.User">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="account" jdbcType="VARCHAR" property="account" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="permission_level" jdbcType="INTEGER" property="permission_level" />
+        <result column="username" jdbcType="VARCHAR" property="username" />
+    </resultMap>
+    <sql id="base_column_list2">
+        id,account,password,permission_level,encrypted_password,username
+    </sql>
+
+    <select id="searchByUserAccount" parameterType="java.lang.String" resultMap="BaseResultMap2">
+        select
+        <include refid="base_column_list2" />
+        from users
+        where account = #{account,jdbcType=VARCHAR}
+    </select>
+    <select id="searchByUserName" parameterType="java.lang.String" resultMap="BaseResultMap2">
+        select
+        <include refid="base_column_list2" />
+        from users
+        where account = #{userName,jdbcType=VARCHAR}
+    </select>
+
+    <select id="searchAll"  resultMap="BaseResultMap2">
+        select
+        <include refid="base_column_list2"/>
+        from users
+    </select>
+    <insert id="addUser" keyProperty="id" parameterType="com.somiao.miniprogram.entity.User" useGeneratedKeys="true">
+        insert into users ( account, password,encrypted_password,username)
+        values (#{account,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR}, #{encrypted_password,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR})
+    </insert>
+    <!-- 下面的还没修改 -->
+    <delete id="deleteUser" parameterType="java.lang.String">
+        delete from user
+        where userName = #{userName,jdbcType=VARCHAR}
+    </delete>
+    <update id="updateUser" parameterType="com.somiao.miniprogram.entity.User">
+        update user
+        <set>
+            <if test=" userCode != null">
+                userCode = #{ userCode,jdbcType=VARCHAR},
+            </if>
+            <if test="image != null">
+                image = #{image,jdbcType=VARCHAR},
+            </if>
+            <if test="log != null">
+                log = #{log,jdbcType=VARCHAR},
+            </if>
+            <if test="helpMessage != null">
+                helpMessage = #{helpMessage,jdbcType=VARCHAR},
+            </if>
+            <if test="comment != null">
+                comment = #{comment,jdbcType=VARCHAR},
+            </if>
+            <if test="submissionDate != null">
+                submissionDate = #{submissionDate,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where userName = #{userName,jdbcType=VARCHAR}
+    </update>
+
+
+
+    <!-- 判断加密密码是否符合-->
+    <select id="getEncrypted_password" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT encrypted_password
+        FROM users
+        WHERE account = #{account,jdbcType=VARCHAR};
+    </select>
+</mapper>
