@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.somiao.miniprogram.dao.SearchRelationshipDao">
+    <!-- 定义的resultMap，可以解决类的属性名和数据库列名不一致的问题-->
+    <resultMap id="BaseResultMap" type="com.somiao.miniprogram.entity.Relationship">
+        <result column="id" jdbcType="INTEGER" property="Rid" />
+        <result column="relationship" jdbcType="VARCHAR" property="relationship" />
+    </resultMap>
+    <sql id="base_column_list">
+        id, relationship, cat_id_1, cat_id_2
+    </sql>
+    <select id="searchRelationshipById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="base_column_list" />
+        from cat_relationships
+        where (cat_id_1 = #{id,jdbcType=INTEGER} or cat_id_2 = #{id,jdbcType=INTEGER}) and relationship != (select name from catdatabase where id = #{id,jdbcType=INTEGER})
+    </select>
+</mapper>

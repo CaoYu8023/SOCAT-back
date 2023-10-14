@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.somiao.miniprogram.dao.SearchCatDao">
+    <!-- 定义的resultMap，可以解决类的属性名和数据库列名不一致的问题-->
+    <resultMap id="BaseResultMap" type="com.somiao.miniprogram.entity.Cat">
+        <id column="ID" jdbcType="INTEGER" property="ID" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="inAtlas" jdbcType="VARCHAR" property="inAtlas" />
+        <result column="nickName" jdbcType="VARCHAR" property="nickName" />
+        <result column="hairColor" jdbcType="VARCHAR" property="hairColor" />
+        <result column="hairColorClassification" jdbcType="VARCHAR" property="hairColorClassification" />
+        <result column="hauntLocation" jdbcType="VARCHAR" property="hauntLocation" />
+        <result column="gender" jdbcType="VARCHAR" property="gender" />
+        <result column="state" jdbcType="VARCHAR" property="state" />
+        <result column="isSterilization" jdbcType="BOOLEAN" property="isSterilization" />
+        <result column="sterilizationTime" jdbcType="VARCHAR" property="sterilizationTime" />
+        <result column="dateOfBirth" jdbcType="VARCHAR" property="dateOfBirth" />
+        <result column="descriptionOfAppearance" jdbcType="VARCHAR" property="descriptionOfAppearance" />
+        <result column="characterOfCat" jdbcType="VARCHAR" property="character" />
+        <result column="firstWitnessedTime" jdbcType="VARCHAR" property="firstWitnessedTime" />
+        <result column="firstWitnessedLocation" jdbcType="VARCHAR" property="firstWitnessedLocation" />
+        <result column="relationship" jdbcType="VARCHAR" property="relationship" />
+        <result column="more" jdbcType="VARCHAR" property="more" />
+        <result column="route" jdbcType="VARCHAR" property="route" />
+        <result column="adoptionTime" jdbcType="VARCHAR" property="adoptionTime" />
+        <result column="timeOfDeath" jdbcType="VARCHAR" property="timeOfDeath" />
+        <result column="causeOfDeath" jdbcType="VARCHAR" property="causeOfDeath" />
+        <result column="addAudio" jdbcType="VARCHAR" property="addAudio" />
+        <result column="indexes" jdbcType="INTEGER" property="indexes" />
+    </resultMap>
+    <resultMap id="catResultMap" type="com.somiao.miniprogram.entity.Cat">
+        <id column="ID" jdbcType="INTEGER" property="ID" />
+        <result property="name" column="name"/>
+        <result property="hairColor" column="hairColor"/>
+    </resultMap>
+    <sql id="base_column_list">
+        ID, name, inAtlas, nickName, hairColor, hairColorClassification, hauntLocation,
+    gender, state, isSterilization, sterilizationTime, dateOfBirth, descriptionOfAppearance,
+    characterOfCat, firstWitnessedTime, firstWitnessedLocation, relationship, more, route,
+    adoptionTime, timeOfDeath, causeOfDeath, addAudio,indexes
+    </sql>
+    <sql id="name_hairColor_list">
+        name, hairColor
+    </sql>
+    <select id="searchByID" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="base_column_list" />
+        from catdatabase
+        where ID = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="searchByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="base_column_list" />
+        from catdatabase
+        where name = #{name,jdbcType=VARCHAR}
+    </select>
+    <select id="searchByInAtlas" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="base_column_list" />
+        from catdatabase
+        where inAtlas = #{inAtlas,jdbcType=INTEGER}
+    </select>
+    <select id="searchByNickName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="base_column_list" />
+        from catdatabase
+        where nickName = #{nickName,jdbcType=VARCHAR}
+    </select>
+    <select id="searchByHairColor" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="base_column_list" />
+        from catdatabase
+        where hairColor = #{hairColor,jdbcType=VARCHAR}
+    </select>
+    <select id="searchByHairColorClassification" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="base_column_list" />
+        from catdatabase
+        where hairColorClassification = #{hairColorClassification,jdbcType=INTEGER}
+    </select>
+    <select id="searchByHauntLocation" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="base_column_list" />
+        from catdatabase
+        where hauntLocation = #{hauntLocation,jdbcType=VARCHAR}
+    </select>
+    <select id="searchByGender" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="base_column_list" />
+        from catdatabase
+        where gender = #{gender,jdbcType=INTEGER}
+    </select>
+    <select id="searchByState" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="base_column_list" />
+        from catdatabase
+        where state = #{state,jdbcType=VARCHAR}
+    </select>
+    <select id="searchByIsSterilization" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="base_column_list" />
+        from catdatabase
+        where isSterilization = #{isSterilization,jdbcType=INTEGER}
+    </select>
+    <select id="searchBySterilizationTime" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="base_column_list" />
+        from catdatabase
+        where sterilizationTime = #{sterilizationTime,jdbcType=VARCHAR}
+    </select>
+    <select id="searchByDateOfBirth" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="base_column_list" />
+        from catdatabase
+        where dateOfBirth = #{dateOfBirth,jdbcType=VARCHAR}
+    </select>
+    <select id="searchByDescriptionOfAppearance" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="base_column_list" />
+        from catdatabase
+        where descriptionOfAppearance = #{descriptionOfAppearance,jdbcType=VARCHAR}
+    </select>
+    <select id="searchByCharacterOfCat" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="base_column_list" />
+        from catdatabase
+        where characterOfCat = #{characterOfCat,jdbcType=INTEGER}
+    </select>
+    <select id="searchByFirstWitnessedTime" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="base_column_list" />
+        from catdatabase
+        where firstWitnessedTime= #{firstWitnessedTime,jdbcType=VARCHAR}
+    </select>
+    <select id="searchByFirstWitnessedLocation" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="base_column_list" />
+        from catdatabase
+        where firstWitnessedLocation = #{firstWitnessedLocation,jdbcType=VARCHAR}
+    </select>
+    <select id="searchByRelationship" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="base_column_list" />
+        from catdatabase
+        where relationShip = #{relationShip,jdbcType=VARCHAR}
+    </select>
+    <select id="searchByMore" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="base_column_list" />
+        from catdatabase
+        where more = #{more,jdbcType=VARCHAR}
+    </select>
+    <select id="searchByRoute" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="base_column_list" />
+        from catdatabase
+        where route = #{route,jdbcType=VARCHAR}
+    </select>
+    <select id="searchByAdoptionTime" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="base_column_list" />
+        from catdatabase
+        where adoptionTime = #{adoptionTime,jdbcType=VARCHAR}
+    </select>
+    <select id="searchByTimeOfDeath" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="base_column_list" />
+        from catdatabase
+        where timeOfDeath = #{timeOfDeath,jdbcType=VARCHAR}
+    </select>
+    <select id="searchByCauseOfDeath" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="base_column_list" />
+        from catdatabase
+        where causeOfDeath = #{causeOfDeath,jdbcType=VARCHAR}
+    </select>
+    <select id="searchByAddAudio" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="base_column_list" />
+        from catdatabase
+        where addAudio = #{addAudio,jdbcType=VARCHAR}
+    </select>
+    <select id="searchAll" resultType="com.somiao.miniprogram.entity.Cat">
+        select
+        <include refid="base_column_list"/>
+        from catdatabase order by ID desc
+    </select>
+    <select id="searchOneLevelCatList"  resultMap="catResultMap">
+        SELECT
+        name,hairColor
+        FROM catdatabase
+    </select>
+
+    <select id="searchIdByHairColorAndState" parameterType="java.lang.String" resultType="Integer">
+        select id
+        from  catdatabase
+        where hairColor=#{hairColor,jdbcType=VARCHAR} and state=#{state,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByID" parameterType="java.lang.Integer">
+        delete from catdatabase
+        where ID = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="add" keyColumn="indexes" keyProperty="id" parameterType="com.somiao.miniprogram.entity.Cat" useGeneratedKeys="true">
+        insert into catdatabase (ID,`name`, inAtlas, nickName,
+                                 hairColor, hairColorClassification, hauntLocation,
+                                 gender, `state`, isSterilization,
+                                 sterilizationTime, dateOfBirth, descriptionOfAppearance,
+                                 characterOfCat, firstWitnessedTime, firstWitnessedLocation,
+                                 relationship, `more`, route,
+                                 adoptionTime, timeOfDeath, causeOfDeath,
+                                 addAudio,indexes)
+        values (#{ID,jdbcType=INTEGER},#{name,jdbcType=VARCHAR}, #{inAtlas,jdbcType=INTEGER}, #{nickName,jdbcType=VARCHAR},
+                #{hairColor,jdbcType=VARCHAR}, #{hairColorClassification,jdbcType=INTEGER}, #{hauntLocation,jdbcType=VARCHAR},
+                #{gender,jdbcType=INTEGER}, #{state,jdbcType=VARCHAR}, #{isSterilization,jdbcType=INTEGER},
+                #{sterilizationTime,jdbcType=VARCHAR}, #{dateOfBirth,jdbcType=VARCHAR}, #{descriptionOfAppearance,jdbcType=VARCHAR},
+                #{characterOfCat,jdbcType=INTEGER}, #{firstWitnessedTime,jdbcType=VARCHAR}, #{firstWitnessedLocation,jdbcType=VARCHAR},
+                #{relationship,jdbcType=VARCHAR}, #{more,jdbcType=VARCHAR}, #{route,jdbcType=VARCHAR},
+                #{adoptionTime,jdbcType=VARCHAR}, #{timeOfDeath,jdbcType=VARCHAR}, #{causeOfDeath,jdbcType=VARCHAR},
+                #{addAudio,jdbcType=VARCHAR},#{indexes,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" keyColumn="indexes" keyProperty="id" parameterType="com.somiao.miniprogram.entity.Cat" useGeneratedKeys="true">
+        insert into catdatabase
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="ID != null">
+                ID,
+            </if>
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="inAtlas != null">
+                inAtlas,
+            </if>
+            <if test="nickName != null">
+                nickName,
+            </if>
+            <if test="hairColor != null">
+                hairColor,
+            </if>
+            <if test="hairColorClassification != null">
+                hairColorClassification,
+            </if>
+            <if test="hauntLocation != null">
+                hauntLocation,
+            </if>
+            <if test="gender != null">
+                gender,
+            </if>
+            <if test="state != null">
+                `state`,
+            </if>
+            <if test="isSterilization != null">
+                isSterilization,
+            </if>
+            <if test="sterilizationTime != null">
+                sterilizationTime,
+            </if>
+            <if test="dateOfBirth != null">
+                dateOfBirth,
+            </if>
+            <if test="descriptionOfAppearance != null">
+                descriptionOfAppearance,
+            </if>
+            <if test="character != null">
+                characterOfCat,
+            </if>
+            <if test="firstWitnessedTime != null">
+                firstWitnessedTime,
+            </if>
+            <if test="firstWitnessedLocation != null">
+                firstWitnessedLocation,
+            </if>
+            <if test="relationship != null">
+                relationship,
+            </if>
+            <if test="more != null">
+                `more`,
+            </if>
+            <if test="route != null">
+                route,
+            </if>
+            <if test="adoptionTime != null">
+                adoptionTime,
+            </if>
+            <if test="timeOfDeath != null">
+                timeOfDeath,
+            </if>
+            <if test="causeOfDeath != null">
+                causeOfDeath,
+            </if>
+            <if test="addAudio != null">
+                addAudio,
+            </if>
+            <if test=" indexes != null">
+                indexes,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="inAtlas != null">
+                #{inatlas,jdbcType=INTEGER},
+            </if>
+            <if test="nickName != null">
+                #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="hairColor != null">
+                #{haircolor,jdbcType=VARCHAR},
+            </if>
+            <if test="hairColorClassification != null">
+                #{haircolorclassification,jdbcType=INTEGER},
+            </if>
+            <if test="hauntLocation != null">
+                #{hauntlocation,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null">
+                #{gender,jdbcType=INTEGER},
+            </if>
+            <if test="state != null">
+                #{state,jdbcType=VARCHAR},
+            </if>
+            <if test="isSterilization != null">
+                #{issterilization,jdbcType=INTEGER},
+            </if>
+            <if test="sterilizationTime != null">
+                #{sterilizationtime,jdbcType=VARCHAR},
+            </if>
+            <if test="dateOfBirth != null">
+                #{dateofbirth,jdbcType=VARCHAR},
+            </if>
+            <if test="descriptionOfAppearance != null">
+                #{descriptionofappearance,jdbcType=VARCHAR},
+            </if>
+            <if test="character != null">
+                #{character,jdbcType=INTEGER},
+            </if>
+            <if test="firstWitnessedTime != null">
+                #{firstwitnessedtime,jdbcType=VARCHAR},
+            </if>
+            <if test="firstWitnessedLocation != null">
+                #{firstwitnessedlocation,jdbcType=VARCHAR},
+            </if>
+            <if test="relationship != null">
+                #{relationship,jdbcType=VARCHAR},
+            </if>
+            <if test="more != null">
+                #{more,jdbcType=VARCHAR},
+            </if>
+            <if test="route != null">
+                #{route,jdbcType=VARCHAR},
+            </if>
+            <if test="adoptionTime != null">
+                #{adoptiontime,jdbcType=VARCHAR},
+            </if>
+            <if test="timeOfDeath != null">
+                #{timeofdeath,jdbcType=VARCHAR},
+            </if>
+            <if test="causeOfDeath != null">
+                #{causeofdeath,jdbcType=VARCHAR},
+            </if>
+            <if test="addAudio != null">
+                #{addaudio,jdbcType=VARCHAR},
+            </if>
+            <if test="indexes != null">
+                #{indexes,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.somiao.miniprogram.entity.Cat">
+        update catdatabase
+        <set>
+            <if test="name != null">
+                `name` = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="inAtlas != null">
+                inAtlas = #{inatlas,jdbcType=INTEGER},
+            </if>
+            <if test="nickname != null">
+                nickName = #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="hairColor != null">
+                hairColor = #{haircolor,jdbcType=VARCHAR},
+            </if>
+            <if test="hairColorClassification != null">
+                hairColorClassification = #{haircolorclassification,jdbcType=INTEGER},
+            </if>
+            <if test="hauntLocation != null">
+                hauntLocation = #{hauntlocation,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null">
+                gender = #{gender,jdbcType=INTEGER},
+            </if>
+            <if test="state != null">
+                `state` = #{state,jdbcType=VARCHAR},
+            </if>
+            <if test="isSterilization != null">
+                isSterilization = #{issterilization,jdbcType=INTEGER},
+            </if>
+            <if test="sterilizationTime != null">
+                sterilizationTime = #{sterilizationtime,jdbcType=VARCHAR},
+            </if>
+            <if test="dateOfBirth != null">
+                dateOfBirth = #{dateofbirth,jdbcType=VARCHAR},
+            </if>
+            <if test="descriptionOfAppearance != null">
+                descriptionOfAppearance = #{descriptionofappearance,jdbcType=VARCHAR},
+            </if>
+            <if test="character != null">
+                `character` = #{character,jdbcType=INTEGER},
+            </if>
+            <if test="firstWitnessedTime != null">
+                firstWitnessedTime = #{firstwitnessedtime,jdbcType=VARCHAR},
+            </if>
+            <if test="firstWitnessedLocation != null">
+                firstWitnessedLocation = #{firstwitnessedlocation,jdbcType=VARCHAR},
+            </if>
+            <if test="relationship != null">
+                relationship = #{relationship,jdbcType=VARCHAR},
+            </if>
+            <if test="more != null">
+                `more` = #{more,jdbcType=VARCHAR},
+            </if>
+            <if test="route != null">
+                route = #{route,jdbcType=VARCHAR},
+            </if>
+            <if test="adoptionTime != null">
+                adoptionTime = #{adoptiontime,jdbcType=VARCHAR},
+            </if>
+            <if test="timeOfDeath != null">
+                timeOfDeath = #{timeofdeath,jdbcType=VARCHAR},
+            </if>
+            <if test="causeOfDeath != null">
+                causeOfDeath = #{causeofdeath,jdbcType=VARCHAR},
+            </if>
+            <if test="addAudio != null">
+                addAudio = #{addaudio,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.somiao.miniprogram.entity.Cat">
+        update catdatabase
+        set `name` = #{name,jdbcType=VARCHAR},
+            inAtlas = #{inAtlas,jdbcType=INTEGER},
+            nickName = #{nickName,jdbcType=VARCHAR},
+            hairColor = #{hairColor,jdbcType=VARCHAR},
+            hairColorClassification = #{hairColorClassification,jdbcType=INTEGER},
+            hauntLocation = #{hauntLocation,jdbcType=VARCHAR},
+            gender = #{gender,jdbcType=INTEGER},
+            `state` = #{state,jdbcType=VARCHAR},
+            isSterilization = #{isSterilization,jdbcType=INTEGER},
+            sterilizationTime = #{sterilizationTime,jdbcType=VARCHAR},
+            dateOfBirth = #{dateOfBirth,jdbcType=VARCHAR},
+            descriptionOfAppearance = #{descriptionOfAppearance,jdbcType=VARCHAR},
+            characterOfCat = #{characterOfCat,jdbcType=INTEGER},
+            firstWitnessedTime = #{firstWitnessedTime,jdbcType=VARCHAR},
+            firstWitnessedLocation = #{firstWitnessedLocation,jdbcType=VARCHAR},
+            relationship = #{relationship,jdbcType=VARCHAR},
+            `more` = #{more,jdbcType=VARCHAR},
+            route = #{route,jdbcType=VARCHAR},
+            adoptionTime = #{adoptionTime,jdbcType=VARCHAR},
+            timeOfDeath = #{timeOfDeath,jdbcType=VARCHAR},
+            causeOfDeath = #{causeOfDeath,jdbcType=VARCHAR},
+            addAudio = #{addAudio,jdbcType=VARCHAR}
+        where ID = #{ID,jdbcType=INTEGER}
+    </update>
+</mapper>

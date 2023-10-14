@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.somiao.miniprogram.dao.SearchCommentsDao">
+
+    <resultMap type="com.somiao.miniprogram.entity.Comments" id="CommentsMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="userAccount" column="user_account" jdbcType="VARCHAR"/>
+        <result property="text" column="text" jdbcType="VARCHAR"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="catId" column="cat_id" jdbcType="INTEGER"/>
+        <result property="parentCommentId" column="parent_comment_id" jdbcType="INTEGER"/>
+        <result property="comment_time" column="comment_time" jdbcType="DATE"/>
+    </resultMap>
+
+    <!--根据猫咪id查询评论-->
+    <select id="searchByCatId"  parameterType="Integer" resultMap="CommentsMap">
+        select
+        user_account,text,comment_time
+        from comments
+        where cat_id = #{id}
+    </select>
+
+
+</mapper>
+

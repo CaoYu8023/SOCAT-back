@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.somiao.miniprogram.dao.SearchRescueInfoDao">
+    <!-- 定义的resultMap，可以解决类的属性名和数据库列名不一致的问题-->
+    <resultMap id="BaseResultMap" type="com.somiao.miniprogram.entity.RescueInfo">
+        <result column="user_id" jdbcType="INTEGER" property="user_id" />
+        <result column="userName" jdbcType="VARCHAR" property="userName" />
+        <result column="title" jdbcType="VARCHAR" property="title" />
+        <result column="detailTime" jdbcType="VARCHAR" property="detailTime" />
+        <result column="id" jdbcType="INTEGER" property="article_id" />
+        <result column="text" jdbcType="VARCHAR" property="content" />
+        <result column="detailImg" jdbcType="VARCHAR" property="detailImg" />
+        <result column="userImg" jdbcType="VARCHAR" property="userImg" />
+        <result column="mode" jdbcType="VARCHAR" property="mode" />
+    </resultMap>
+    <select id="searchRescueInfo" resultMap="BaseResultMap">
+        SELECT user_id, userName, title ,detailTime, articles.id,detailImg,userImg,mode
+        from articles LEFT JOIN users ON articles.user_id = users.id
+    </select>
+    <select id="searchRescueInfoByArticleId" resultMap="BaseResultMap">
+        SELECT user_id, userName, title , detailTime,text,detailImg,userImg,mode
+        from articles LEFT JOIN users ON articles.user_id = users.id
+        where articles.id = #{id,jdbcType=INTEGER}
+    </select>
+</mapper>

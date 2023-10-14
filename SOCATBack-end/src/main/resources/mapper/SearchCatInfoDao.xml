@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.somiao.miniprogram.dao.SearchCatInfoDao">
+    <!-- 定义的resultMap，可以解决类的属性名和数据库列名不一致的问题-->
+    <resultMap id="BaseResultMap3" type="com.somiao.miniprogram.entity.CatInfo">
+        <result column="ID" jdbcType="INTEGER" property="ID" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="imagePath" jdbcType="VARCHAR" property="imagePath" />
+    </resultMap>
+    <sql id="base_column_list3">
+       ID,name,imagePath
+    </sql>
+    <select id="searchByCatID" parameterType="java.lang.Integer" resultMap="BaseResultMap3">
+        select
+        <include refid="base_column_list3" />
+        from catinfo
+        where ID= #{ID,jdbcType=INTEGER}
+    </select>
+    <select id="getCountsOfImage" parameterType="java.lang.Integer"  resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM catinfo
+        where ID = #{ID,jdbcType=INTEGER}
+    </select>
+    <select id="searchAll"  resultMap="BaseResultMap3">
+        select
+        <include refid="base_column_list3"/>
+        from catinfo
+    </select>
+    <insert id="addImage" keyColumn="UserName" keyProperty="id" parameterType="com.somiao.miniprogram.entity.CatInfo" useGeneratedKeys="true">
+        insert into catInfo (ID,name,imagePath)
+        values (#{ID,jdbcType=INTEGER},#{name,jdbcType=VARCHAR}, #{imagePath,jdbcType=VARCHAR}
+               )
+    </insert>
+    <delete id="deleteImage" parameterType="java.lang.Integer">
+        delete from catinfo
+        where ID = #{ID,jdbcType=INTEGER}
+    </delete>
+
+</mapper>
